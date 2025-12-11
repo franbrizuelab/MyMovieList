@@ -36,6 +36,7 @@ th, td {
 th {
     background-color: var(--header-color);
     color: white;
+    text-align: center;
 }
 
 tr:nth-child(even) {

@@ -227,6 +227,8 @@ th {
     color: white;
 
     border-right: 1px solid #5774b6; /* Vertical separator */
+    
+    text-align: center;
 
 }
 
