@@ -85,37 +85,41 @@ body {
 
 /* Flash Messages */
 .flash-messages {
-    max-width: 600px;
-    margin: 20px auto;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #f5c6cb; /* default for danger/warning */
-    background-color: #f8d7da;  /* default for danger/warning */
-    color: #721c24;
+	margin-top: 15px;
+	padding: 0; /* since ul will handle padding of messages, or keep it if you want */
+	border-radius: 5px;
 }
 
 .flash-messages ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
+	list-style: none;
+	margin: 0;
+	padding: 0;
 }
 
-/* Variants for success, warning, etc. */
-.flash-messages .success {
-    background-color: #155724;
-    color: #f4f4f9;
-    border: 1px solid #155724;
+/* Each <li> changes color based on category */
+.flash-messages li.success {
+	background-color: #d4edda;
+	color: #155724;
+	border: 1px solid #c3e6cb;
+	margin-bottom: 5px;
+	padding: 10px;
+	border-radius: 5px;
 }
-
-.flash-messages .warning {
-    background-color: #856404;
-    color: #fff3cd;
-    border: 1px solid #856404;
+.flash-messages li.danger {
+	background-color: #f8d7da;
+	color: #721c24;
+	border: 1px solid #f5c6cb;
+	margin-bottom: 5px;
+	padding: 10px;
+	border-radius: 5px;
 }
-
-.flash-messages .danger {
-    background-color: #721c24;
-    color: #f4f4f9;
+.flash-messages li.warning {
+	background-color: #fff3cd;
+	color: #856404;
+	border: 1px solid #ffeeba;
+	margin-bottom: 5px;
+	padding: 10px;
+	border-radius: 5px;
 }
 
 .icon-btn {
