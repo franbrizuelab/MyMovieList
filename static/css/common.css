@@ -185,8 +185,8 @@ h1, h2, h3 {
     stroke: white; /* fill for the icon */
 }
 
-/* Login Button styles */
-.login-btn {
+/* Header Login Button styles */
+.header-login-btn {
     background-color: var(--header-color);
     border: none;
     border-radius: 50%; /* circle shape */
@@ -198,11 +198,11 @@ h1, h2, h3 {
     transition: background-color 0.3s ease;
 }
 
-.login-btn:hover {
+.header-login-btn:hover {
     background-color: var(--header-hover-color);
 }
 
-.login-btn svg {
+.header-login-btn svg {
     width: 24px;
     height: 24px;
     stroke: white; /* fill for the icon */
