@@ -187,7 +187,7 @@ h1, h2, h3 {
 
 /* Login Button styles */
 .login-btn {
-    background-color: var(--header-color);
+    background-color: var(--button-main-color);
     color: white;
     padding: 10px;
     font-size: 16px;
