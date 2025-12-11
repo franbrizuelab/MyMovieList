@@ -14,7 +14,8 @@ CREATE TABLE Movies (
     runtime INTEGER,
     voteAverage FLOAT,
     voteCount INTEGER,
-    budget INTEGER
+    budget INTEGER,
+    coverUrl TEXT
 );
 
 -- Create the Keywords table

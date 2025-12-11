@@ -83,3 +83,24 @@ INSERT INTO Ratings (movieId, userId, rating)
 	WHERE movieId IN (SELECT movieId FROM Movies)
 	AND userId IN (SELECT userId FROM Users);
 
+DROP TEMPORARY TABLE TempRatings;
+
+-- Populate Movie Covers
+CREATE TEMPORARY TABLE TempCovers (
+    movieId INTEGER,
+    coverUrl TEXT
+);
+
+LOAD DATA LOCAL INFILE 'Data/CleanData/movie_covers.csv'
+INTO TABLE TempCovers
+FIELDS TERMINATED BY ','
+OPTIONALLY ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+(movieId, coverUrl);
+
+UPDATE Movies m
+JOIN TempCovers t ON m.movieId = t.movieId
+SET m.coverUrl = t.coverUrl;
+
+DROP TEMPORARY TABLE TempCovers;
+

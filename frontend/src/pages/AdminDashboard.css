@@ -1,0 +1,275 @@
+.admin-dashboard {
+  padding: 20px;
+  color: var(--text-primary);
+}
+
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  gap: 20px;
+}
+
+.admin-header h1 {
+  white-space: nowrap;
+}
+
+.search-wrapper form {
+  position: relative;
+  width: 300px;
+}
+
+.search-wrapper input {
+  width: 100%;
+  background-color: #1f1f1f;
+  border: 1px solid #333;
+  border-radius: 20px;
+  padding: 10px 35px 10px 40px;
+  color: var(--text-primary);
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.search-wrapper input:focus {
+  border-color: var(--accent-orange);
+}
+
+.search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-secondary);
+}
+
+.clear-btn {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.clear-btn:hover {
+  color: var(--text-primary);
+}
+
+.add-movie-form {
+  background: var(--bg-card);
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 30px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+.add-movie-form h3 {
+  grid-column: 1 / -1;
+  margin-bottom: 10px;
+}
+
+.add-movie-form input,
+.add-movie-form textarea {
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #333;
+  background: #1f1f1f;
+  color: white;
+  width: 100%;
+}
+
+.add-movie-form textarea {
+  grid-column: 1 / -1;
+  resize: vertical;
+}
+
+.movies-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--bg-card);
+  border-radius: 8px;
+  overflow: hidden;
+  table-layout: fixed;
+}
+
+.movies-table th,
+.movies-table td {
+  padding: 15px;
+  text-align: left;
+  border-bottom: 1px solid #333;
+  vertical-align: middle;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.movies-table th:nth-child(1) { width: 60px; } /* ID */
+.movies-table th:nth-child(2) { width: 40%; } /* Title */
+.movies-table th:nth-child(3) { width: 120px; } /* Date */
+.movies-table th:nth-child(4) { width: 100px; } /* Vote Avg */
+.movies-table th:nth-child(5) { width: 100px; } /* Vote Count */
+.movies-table th:nth-child(6) { width: 120px; } /* Actions */
+
+.edit-row {
+  background-color: #1a1a1a;
+}
+
+.edit-cell {
+  white-space: normal !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  padding: 0 !important;
+}
+
+.edit-form-expanded {
+  padding: 20px;
+  background: #151515;
+  border-top: 1px solid #333;
+  border-bottom: 1px solid #333;
+}
+
+.edit-form-expanded h4 {
+  margin-bottom: 15px;
+  color: var(--accent-orange);
+}
+
+.edit-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.form-group label {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.form-group input,
+.form-group textarea {
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #333;
+  background: #252525;
+  color: white;
+}
+
+.form-group.full-width {
+  grid-column: 1 / -1;
+}
+
+.edit-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.save-btn {
+  background: var(--accent-orange);
+  color: white;
+}
+
+.cancel-btn {
+  background: #333;
+  color: white;
+}
+
+.action-btn {
+  padding: 6px 12px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  margin-right: 5px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.edit-btn {
+  background: black;
+  color: var(--accent-orange);
+  border: 1px solid var(--accent-orange);
+}
+
+.page-input-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.page-input {
+  width: 50px;
+  padding: 4px 8px;
+  background: #1f1f1f;
+  border: 1px solid #333;
+  border-radius: 4px;
+  color: white;
+  text-align: center;
+}
+
+.page-input::-webkit-inner-spin-button,
+.page-input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.delete-btn {
+  background: var(--accent-orange);
+  color: black;
+}
+
+.save-btn {
+  background: var(--accent-orange);
+  color: white;
+}
+
+.cancel-btn {
+  background: #333;
+  color: white;
+}
+
+.cancel-btn {
+  background: #888;
+  color: white;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 30px;
+}
+
+.page-btn {
+  padding: 8px 12px;
+  background: var(--bg-card);
+  border: 1px solid #333;
+  color: white;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.page-btn.active {
+  background: var(--accent-orange);
+  border-color: var(--accent-orange);
+}
+
+.page-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
