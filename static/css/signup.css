@@ -1,9 +1,4 @@
-:root {
-    /* Same root variables as in main.html */
-    --header-color: #00298f;       /* Primary header and button color */
-    --header-hover-color: #1c44a3; /* Hover color for buttons */
-    --active-tab-color: #5774b6;   /* (Optional) for consistency */
-}
+@import url("common.css");
 
 body {
     font-family: Arial, sans-serif;

@@ -1,9 +1,4 @@
-:root {
-    --header-color: #00298f; /* Primary header color */
-    --header-hover-color: #1c44a3; /* Hover color for buttons */
-    --active-tab-color: #5774b6; /* Active tab background */
-    --table-border-color: #ddd; /* Table border color */
-}
+@import url("common.css");
 
 body {
     font-family: Arial, sans-serif;

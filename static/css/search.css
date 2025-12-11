@@ -1,7 +1,4 @@
-:root {
-    --header-color: #00298f;
-    --header-hover-color: #1c44a3;
-}
+@import url("common.css");
 
 body {
     font-family: Arial, sans-serif;
