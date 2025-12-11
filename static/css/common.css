@@ -57,7 +57,7 @@ body {
     padding: 8px 16px;
     background-color: #333;
     border-radius: 5px;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.5s ease-in-out;
 }
 
 .header a:hover {
@@ -133,7 +133,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.5s ease-in-out;
 }
 
 .icon-btn:hover {
@@ -174,7 +174,7 @@ h1, h2, h3 {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.5s ease-in-out;
 }
 
 .search-container .search-button:hover {
@@ -197,7 +197,7 @@ h1, h2, h3 {
     display: flex; /* To center the SVG */
     align-items: center;
     justify-content: center;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.5s ease-in-out;
 }
 
 .header-login-btn:hover {
@@ -219,7 +219,7 @@ h1, h2, h3 {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.5s ease-in-out;
 }
 
 .logout-button:hover {
@@ -239,4 +239,15 @@ h1 { /* For movie.html main title */
 
 table a { /* For movie titles in tables */
     font-family: 'Montserrat', sans-serif;
+    color: black; /* Default color */
+    text-decoration: none; /* Remove underline */
+    transition: font-weight 0.5s ease-in-out; /* Progressive bolding */
+}
+
+table a:visited {
+    color: #333; /* Dark grey for visited links */
+}
+
+table a:hover {
+    font-weight: 700; /* Bold on hover (Montserrat:wght@700 is available) */
 }
