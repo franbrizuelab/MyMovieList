@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ movie['title'] }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #00298f;
+            color: white;
+            padding: 10px 20px;
+        }
+
+        .logo a {
+            text-decoration: none; /* Remove underline */
+            color: inherit; /* Inherit text color */
+            display: inline-block; /* Properly wrap the image */
+            background: none !important; /* Forcefully remove background */
+            border: none; /* Remove any border */
+            padding: 0; /* Remove any extra padding */
+            margin: 0; /* Remove extra margin */
+        }
+
+        .logo img {
+            display: block; 
+            background: none; 
+            border: none;
+            padding: 0;
+            margin: 0; 
+            height: 50px; 
+            width: auto; 
+        }
+
+        .header a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 16px;
+            background-color: #333;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .header a:hover {
+            background-color: #555;
+        }
+
+        .search-container form {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .search-container input[type="text"] {
+            padding: 8px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 200px;
+        }
+
+        .search-container button {
+            padding: 8px 16px;
+            font-size: 14px;
+            background-color: white;
+            color: #00298f;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .search-container button:hover {
+            background-color: #f1f1f1;
+        }
+
+        .content {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h1 {
+            color: #00298f;
+        }
+
+        .details {
+            margin-top: 20px;
+        }
+
+        .details p {
+            margin: 10px 0;
+            font-size: 16px;
+        }
+
+        .details span {
+            font-weight: bold;
+        }
+
+        a {
+            color: #00298f;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .comments {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .comments h2 {
+            color: #00298f;
+            margin-bottom: 20px;
+        }
+
+        .comments ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .comments li {
+            margin-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+        }
+
+        .comments p {
+            margin: 5px 0;
+        }
+
+        .comments form {
+            margin-top: 20px;
+        }
+
+        .comments textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .comments button {
+            padding: 10px 20px;
+            background-color: #00298f;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .comments button:hover {
+            background-color: #1c44a3;
+        }
+		
+		/* Flash Messages Section */
+        .flash-messages {
+			margin-top: 15px;
+			padding: 0; /* since ul will handle padding of messages, or keep it if you want */
+			border-radius: 5px;
+		}
+
+		.flash-messages ul {
+			list-style: none;
+			margin: 0;
+			padding: 0;
+		}
+
+		/* Each <li> changes color based on category */
+		.flash-messages li.success {
+			background-color: #d4edda;
+			color: #155724;
+			border: 1px solid #c3e6cb;
+			margin-bottom: 5px;
+			padding: 10px;
+			border-radius: 5px;
+		}
+		.flash-messages li.danger {
+			background-color: #f8d7da;
+			color: #721c24;
+			border: 1px solid #f5c6cb;
+			margin-bottom: 5px;
+			padding: 10px;
+			border-radius: 5px;
+		}
+		.flash-messages li.warning {
+			background-color: #fff3cd;
+			color: #856404;
+			border: 1px solid #ffeeba;
+			margin-bottom: 5px;
+			padding: 10px;
+			border-radius: 5px;
+		}
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <div class="header">
+        <div class="logo">
+            <a href="/">
+                <img src="/static/nycuflix.png" alt="Movie Catalog Logo">
+            </a>
+        </div>
+        <div class="search-container">
+            <form method="GET" action="/search">
+                <input type="text" id="search-query" name="query" placeholder="Search for movies..." required>
+                <button type="submit">Search</button>
+            </form>
+        </div>
+        <div style="display: flex; align-items: center; gap: 10px;"></divstyle>
+            {% if is_logged_in %}
+                <a href="/logout" style="text-decoration: none; padding: 5px 10px; background: #007BFF; color: white; border-radius: 5px;">Logout ({{ username }})</a>
+
+                {% if display_role %}
+                    <!-- Admin link to redirect to the Admin Dashboard -->
+                    <a href="/admin" style="text-decoration: none; padding: 5px 10px; background: #007BFF; color: white; border-radius: 5px;">Admin Dashboard</a>
+				{% endif %}
+            {% else %}
+                <a href="/login" style="text-decoration: none; padding: 5px 10px; background: #007BFF; color: white; border-radius: 5px;">Login/Sign Up</a>
+            {% endif %}
+        </div>
+
+    </div>
+    <!-- Movie Details Section -->
+    <div class="content">
+        <h1>{{ movie['title'] }}</h1>
+
+        <div class="details">
+            
+            <p><span>Tagline:</span>
+				{% if movie['tagline'] %}
+					{{ movie['tagline'] }}
+				{% else %}
+					No data
+				{% endif %}
+			</p>
+
+			<p><span>Overview:</span>
+				{% if movie['overview'] %}
+					{{ movie['overview'] }}
+				{% else %}
+					No data
+				{% endif %}
+			</p>
+
+			<p><span>Release Date:</span>
+				{% if movie['releaseDate'] %}
+					{{ movie['releaseDate'] }}
+				{% else %}
+					No data
+				{% endif %}
+			</p>
+
+			<p><span>Language:</span>
+				{% if movie['language'] %}
+					{{ movie['language'] }}
+				{% else %}
+					No data
+				{% endif %}
+			</p>
+
+			<p><span>Runtime:</span>
+				{% if movie['runtime'] %}
+					{{ movie['runtime'] }} mins
+				{% else %}
+					No data
+				{% endif %}
+			</p>
+
+			<p><span>Budget:</span>
+				{% if movie['budget'] %}
+					${{ '{:,}'.format(movie['budget']) }}
+				{% else %}
+					No data
+				{% endif %}
+			</p>
+
+			<p><span>Critic Ratings:</span>
+				{% if average_rating %}
+					{{ average_rating }}
+				{% else %}
+					No data
+				{% endif %}
+			</p>
+
+			<p><span>User Ratings:</span>
+				{% if user_rating_average %}
+					{{ user_rating_average }}
+				{% else %}
+					No data
+				{% endif %}
+			</p>
+            
+            {% if is_logged_in %}
+                {% if user_rating %}
+                <p><span>Your Rating:</span> {{ user_rating }}</p>
+                <form method="POST" action="/movie/{{ movie['movieId'] }}/rate">
+                    <label for="new-rating">Update your rating (0-5):</label>
+                    <input type="number" id="new-rating" name="rating" min="0" max="5" required>
+                    <button type="submit">Update Rating</button>
+                </form>
+                {% else %}
+                <p>You haven't rated this movie yet.</p>
+                <form method="POST" action="/movie/{{ movie['movieId'] }}/rate">
+                    <label for="new-rating">Rate this movie (0-5):</label>
+                    <input type="number" id="new-rating" name="rating" min="0" max="5" required>
+                    <button type="submit">Submit Rating</button>
+                </form>
+                {% endif %}
+            {% endif %}
+            
+        </div>
+
+        <a href="/search">Back to Main Page</a>
+    </div>
+
+    <div class="comments">
+        <h2>Comments</h2> 
+        <!-- Display Existing Comments -->
+		{% if comments %}
+			<ul>
+				{% for comment in comments %}
+					<li>
+						<!-- Commenter name & Timestamp -->
+						<p>
+							<strong>{{ comment['userName'] }}</strong>
+							<em>{{ comment['timeStamp'] }}</em>
+						</p>
+
+						{# Inline editing if query param is ?edit=<commentId> and the user is the owner #}
+						{% if is_logged_in 
+							  and username == comment['userName'] 
+							  and request.args.get('edit') == comment['commentId']|string %}
+							
+							<!-- Edit Form -->
+							<form method="POST" action="/edit_comment/{{ comment['commentId'] }}">
+								<textarea name="comment" rows="3" style="width: 100%;">
+									{{ comment['commentText'] }}
+								</textarea>
+								<input type="hidden" name="movie_id" value="{{ movie['movieId'] }}">
+								<button type="submit" style="margin-top: 10px;">Save</button>
+								<a href="/movie/{{ movie['movieId'] }}" 
+								   style="margin-left: 10px; color: red;">Cancel</a>
+							</form>
+
+						{% else %}
+							<!-- Normal Display of the Comment -->
+							<p>{{ comment['commentText'] }}</p>
+
+							{# Show Edit/Delete buttons depending on user permissions #}
+							{% if is_logged_in %}
+								<!-- If user is the owner of the comment -->
+								{% if username == comment['userName'] %}
+									<!-- Edit Link -->
+									<a href="/movie/{{ movie['movieId'] }}?edit={{ comment['commentId'] }}"
+									   style="color: #1c44a3;">Edit</a>
+
+									<!-- Delete Form -->
+									<form method="POST" action="/delete_comment/{{ comment['commentId'] }}" 
+										  style="display:inline;">
+										<input type="hidden" name="movie_id" value="{{ movie['movieId'] }}">
+										<button type="submit" 
+												style="color: red; background: none; border: none; cursor: pointer; text-decoration: underline;"
+												onclick="return confirm('Are you sure you want to delete this comment?')">
+											Delete
+										</button>
+									</form>
+
+								<!-- If user is admin (can delete any comment, edit only their own) -->
+								{% elif user_role == 'admin' %}
+									<!-- Delete Form only -->
+									<form method="POST" action="/delete_comment/{{ comment['commentId'] }}" 
+										  style="display:inline;">
+										<input type="hidden" name="movie_id" value="{{ movie['movieId'] }}">
+										<button type="submit" 
+												style="color: red; background: none; border: none; cursor: pointer; text-decoration: underline;"
+												onclick="return confirm('Are you sure you want to delete this comment?')">
+											Delete
+										</button>
+									</form>
+								{% endif %}
+							{% endif %}
+						{% endif %}
+					</li>
+				{% endfor %}
+			</ul>
+		{% else %}
+			<p>No comments yet. Be the first to comment!</p>
+		{% endif %}
+		<!-- Flash Messages -->
+		{% with messages = get_flashed_messages(with_categories=true) %}
+		{% if messages %}
+			<div class="flash-messages">
+				<ul>
+					{% for category, message in messages %}
+						<li class="{{ category }}">{{ message }}</li>
+					{% endfor %}
+				</ul>
+			</div>
+		{% endif %}
+		{% endwith %}
+        <!-- Add a New Comment -->
+        {% if is_logged_in and username %}
+            <form method="POST" action="/movie/{{ movie['movieId'] }}">
+                <textarea name="comment" rows="3" placeholder="Leave a comment..." required></textarea>
+                <button type="submit">Post Comment</button>
+            </form>
+        
+        {% else %}
+			<p><a href="{{ url_for('login', next=movie['movieId']) }}">Log in</a> to leave a comment.</p>
+		{% endif %}
+
+    </div>
+    
+</body>
+</html>

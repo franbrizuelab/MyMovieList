@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Catalog</title>
+    <style>
+        :root {
+            --header-color: #00298f;       /* Primary header and tab color */
+            --header-hover-color: #1c44a3; /* Hover color for tabs */
+            --active-tab-color: #5774b6;   /* Active tab color */
+            --tab-section-width: 80%;      /* Adjust the total width of the tab section */
+            --tab-buttons-width: 60%;      /* Adjust the total width occupied by the tab buttons */
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+
+        /* Header Section */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--header-color);
+            color: white;
+            padding: 10px 20px;
+        }
+
+        .logo a {
+            text-decoration: none;
+            color: inherit;
+            display: inline-block;
+            background: none !important;
+            border: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .logo img {
+            display: block; 
+            background: none;
+            border: none;
+            padding: 0;
+            margin: 0; 
+            height: 50px; 
+            width: auto; 
+        }
+
+        .logo a:focus, 
+        .logo a:hover {
+            outline: none;
+        }
+
+        .header a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 16px;
+            background-color: #333;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .header a:hover {
+            background-color: #555;
+        }
+
+        /* Search Container */
+        .search-container {
+            max-width: 600px;
+            margin: 20px auto;
+            text-align: center;
+        }
+
+        .search-container form {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .search-container input[type="text"] {
+            padding: 8px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 200px;
+        }
+
+        .search-container button {
+            padding: 8px 16px;
+            font-size: 14px;
+            background-color: white;
+            color: var(--header-color);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .search-container button:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* Flash Messages */
+        .flash-messages {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #f5c6cb; /* default for danger/warning */
+            background-color: #f8d7da;  /* default for danger/warning */
+            color: #721c24;
+        }
+
+        .flash-messages ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        /* Variants for success, warning, etc. */
+        /*change color of background and color*/
+        .flash-messages .success {
+            background-color: #155724;
+            color: #f4f4f9;
+            border: 1px solid #155724;
+        }
+
+        .flash-messages .warning {
+            background-color: #856404;
+            color: #fff3cd;
+            border: 1px solid #856404;
+        }
+            /*change color of background and color*/
+        .flash-messages .danger {
+            background-color: #721c24;
+            color: #f4f4f9;
+        }
+        
+        /* Tabs Container */
+        .tabs-container {
+            max-width: var(--tab-section-width);
+            margin: 20px auto;
+            background: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: center;
+            width: var(--tab-buttons-width);
+            margin: 0 auto 20px;
+        }
+
+        .tab {
+            flex-grow: 1;
+            padding: 10px 20px;
+            background-color: var(--header-color);
+            color: white;
+            cursor: pointer;
+            margin-right: 5px;
+            border-radius: 5px;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .tab:last-child {
+            margin-right: 0;
+        }
+
+        .tab:hover {
+            background-color: var(--header-hover-color);
+        }
+
+        .tab.active {
+            background-color: var(--active-tab-color);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: var(--header-color);
+            color: white;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .search-results {
+            margin-top: 20px;
+        }
+
+        .search-results h3 {
+            text-align: center;
+            color: var(--header-color);
+        }
+    </style>
+    <script>
+        function showTab(tabIndex) {
+            const tabs = document.querySelectorAll('.tab-content');
+            const tabButtons = document.querySelectorAll('.tab');
+            tabs.forEach((tab, index) => {
+                tab.classList.remove('active');
+                tabButtons[index].classList.remove('active');
+                if (index === tabIndex) {
+                    tab.classList.add('active');
+                    tabButtons[index].classList.add('active');
+                }
+            });
+        }
+    
+        document.addEventListener('DOMContentLoaded', () => {
+            showTab(0); // Show the first tab by default
+        });
+    </script>
+</head>
+<body>
+
+    <!-- Header -->
+    <div class="header">
+        <div class="logo">
+            <a href="/">
+                <img src="/static/nycuflix.png" alt="Movie Catalog Logo">
+            </a>
+        </div>
+        <div class="search-container">
+            <form method="GET" action="/search">
+                <input type="text" id="search-query" name="query" placeholder="Search for movies..." required>
+                <button type="submit">Search</button>
+            </form>
+        </div>
+        <!-- Hardcoded Fallback -->
+        <div style="display: flex; align-items: center; gap: 10px;"></divstyle>
+            {% if is_logged_in %}
+                <a href="/logout" style="text-decoration: none; padding: 5px 10px; background: #007BFF; color: white; border-radius: 5px;">Logout ({{ username }})</a>
+
+                {% if display_role %}
+                    <!-- Admin link to redirect to the Admin Dashboard -->
+                    <a href="/admin" style="text-decoration: none; padding: 5px 10px; background: #007BFF; color: white; border-radius: 5px;">Admin Dashboard</a>        {% endif %}
+            {% else %}
+                <a href="/login" style="text-decoration: none; padding: 5px 10px; background: #007BFF; color: white; border-radius: 5px;">Login/Sign Up</a>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Flash Messages Section-->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <div class="flash-messages">
+            <ul>
+                {% for category, message in messages %}
+                    <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+    {% endwith %}
+
+    {% if search_results %}
+        <div class="search-results">
+            <h3>Search Results</h3>
+            <table>
+                <tr>
+                    <th>Title</th>
+                    <th>Overview</th>
+                </tr>
+                {% for movie in search_results %}
+                <tr>
+                    <td><a href="/movie/{{ movie['movieId'] }}">{{ movie['title'] }}</a></td>
+                    <td>{{ movie['overview'] }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    {% endif %}
+
+    {% if not search_results and tabs %}
+    {% endif %}
+
+    <div class="tabs-container">
+        <div class="tabs">
+            <div class="tab active" onclick="showTab(0)">Rating</div>
+            <div class="tab" onclick="showTab(1)">Random</div>
+            <div class="tab" onclick="showTab(2)">Trending</div>
+            <div class="tab" onclick="showTab(3)">Popular</div> 
+        </div>
+        
+        <!-- Tab Content for Rating -->
+        <div class="tab-content active">
+            <table>
+                <tr>
+                    <th>Title</th>
+                    <th>Rating</th>
+                    <th>Description</th>
+                </tr>
+                {% for movie in rating_table %}
+                <tr>
+                    <td><a href="/movie/{{ movie['movieId'] }}">{{ movie['title'] }}</a></td>
+                    <td>{{ movie['voteAverage'] }}</td>
+                    <td>{{ movie['overview'] }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        
+        <!-- Tab Content for Random -->
+        <div class="tab-content">
+            <table>
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                </tr>
+                {% for movie in random_table %}
+                <tr>
+                    <td><a href="/movie/{{ movie['movieId'] }}">{{ movie['title'] }}</a></td>
+                    <td>{{ movie['overview'] }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        
+        <!-- Tab Content for Trending -->
+        <div class="tab-content">
+            <table>
+                <tr>
+                    <th>Title</th>
+                    <th>Release Year</th>
+                    <th>Description</th>
+                </tr>
+                {% for movie in trending_table %}
+                <tr>
+                    <td><a href="/movie/{{ movie['movieId'] }}">{{ movie['title'] }}</a></td>
+                    <td>{{ movie['releaseYear'] }}</td>
+                    <td>{{ movie['overview'] }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <!-- Tab Content for Popular -->
+        <div class="tab-content">
+            <table>
+                <tr>
+                    <th>Title</th>
+                    <th>Comments Count</th>
+                    <th>Description</th>
+                </tr>
+                {% for movie in popular_table %}
+                <tr>
+                    <td><a href="/movie/{{ movie['movieId'] }}">{{ movie['title'] }}</a></td>
+                    <td>{{ movie['totalComments'] }}</td>
+                    <td>{{ movie['overview'] }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+    </div>
+</body>
+</html>
