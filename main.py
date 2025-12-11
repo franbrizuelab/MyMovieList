@@ -12,7 +12,7 @@ app.secret_key = "your_secret_key"
 # ----------------------------------
 # List of database configurations:
 db_configs = [
-    {   #Configuration 2
+    {   #Configuration 1
         'host': 'localhost',     # Fallback host
         'user': 'CVML',  # Fallback username
         'password': '114DWP2025',   # Fallback password
@@ -63,8 +63,7 @@ def main_page():
             (voteAverage * voteCount) / (voteCount + 1) AS weighted_score
         FROM Movies
         WHERE voteAverage IS NOT NULL AND voteCount IS NOT NULL
-        ORDER BY weighted_score DESC
-        LIMIT 10;
+    LIMIT 30;
     """)
     rating_table = cursor.fetchall()
 
@@ -73,7 +72,7 @@ def main_page():
         SELECT movieId, title, overview 
         FROM Movies 
         ORDER BY RAND() 
-        LIMIT 10;
+        LIMIT 30;
     """)
     random_table = cursor.fetchall()
 
@@ -86,7 +85,7 @@ def main_page():
         WHERE c.timeStamp >= %s
         GROUP BY m.movieId, m.title, m.overview
         ORDER BY commentCount DESC
-        LIMIT 15;
+        LIMIT 30;
     """, (one_week_ago,))
     trending_table = cursor.fetchall()
 
@@ -97,7 +96,7 @@ def main_page():
         LEFT JOIN Comments c ON m.movieId = c.movieId
         GROUP BY m.movieId, m.title, m.overview
         ORDER BY totalComments DESC
-        LIMIT 15;
+        LIMIT 30;
     """)
     popular_table = cursor.fetchall()
 
@@ -579,8 +578,8 @@ def admin_dashboard():
 
     page = request.args.get('page', 1, type=int)  # Current page
     search_query = request.args.get('query', '').strip()  # Search query
-    items_per_page = 10
-    max_visible_pages = 10  # Number of page links to display
+    items_per_page = 30
+    max_visible_pages = 30  # Number of page links to display
     offset = (page - 1) * items_per_page
 
     conn = get_db_connection()
