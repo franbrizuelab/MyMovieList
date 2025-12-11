@@ -163,20 +163,26 @@ h1, h2, h3 {
     color: var(--header-color);
 }
 
-/* Search Container button styles */
-.search-container button {
-    padding: 8px 16px;
-    font-size: 14px;
-    background-color: white;
-    color: var(--header-color);
+.search-container .search-button {
+    background-color: var(--button-main-color);
     border: none;
-    border-radius: 5px;
+    border-radius: 20px; /* round corners */
+    padding: 8px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     transition: background-color 0.3s ease;
 }
 
-.search-container button:hover {
-    background-color: #f1f1f1;
+.search-container .search-button:hover {
+    background-color: var(--header-hover-color);
+}
+
+.search-container .search-button svg {
+    width: 24px;
+    height: 24px;
+    stroke: white; /* fill for the icon */
 }
 
 /* Login Button styles */
