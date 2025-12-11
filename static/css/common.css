@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;700&family=Montserrat:wght@700&display=swap');
+
 :root {
     --header-color: #00298f;       /* Primary header and tab color */
     --header-hover-color: #1c44a3; /* Hover color for tabs */
@@ -7,7 +9,7 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Manrope', sans-serif;
     margin: 0;
     padding: 0;
     background-color: #f4f4f9;
@@ -228,4 +230,13 @@ h1, h2, h3 {
     width: 24px;
     height: 24px;
     stroke: white; /* fill for the icon */
+}
+
+/* Movie titles */
+h1 { /* For movie.html main title */
+    font-family: 'Montserrat', sans-serif;
+}
+
+table a { /* For movie titles in tables */
+    font-family: 'Montserrat', sans-serif;
 }
