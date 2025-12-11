@@ -8,32 +8,7 @@ body {
     padding: 0;
 }
 
-/* Header styling (same as main.html but only the logo) */
-.header {
-    display: flex;
-    align-items: center;
-    background-color: var(--header-color);
-    color: white;
-    padding: 10px 20px;
-}
-.logo a {
-    text-decoration: none;
-    color: inherit;
-    display: inline-block;
-    background: none !important;
-    border: none;
-    padding: 0;
-    margin: 0;
-}
-.logo img {
-    display: block;
-    background: none;
-    border: none;
-    padding: 0;
-    margin: 0;
-    height: 50px;
-    width: auto;
-}
+
 
 /* Container and form styling */
 .container {
