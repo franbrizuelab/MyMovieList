@@ -187,18 +187,25 @@ h1, h2, h3 {
 
 /* Login Button styles */
 .login-btn {
-    background-color: var(--button-main-color);
-    color: white;
-    padding: 10px;
-    font-size: 16px;
+    background-color: var(--header-color);
     border: none;
-    border-radius: 5px;
+    border-radius: 20px; /* round corners */
+    padding: 8px; /* Adjusted padding for icon */
     cursor: pointer;
+    display: flex; /* To center the SVG */
+    align-items: center;
+    justify-content: center;
     transition: background-color 0.3s ease;
 }
 
 .login-btn:hover {
     background-color: var(--header-hover-color);
+}
+
+.login-btn svg {
+    width: 24px;
+    height: 24px;
+    stroke: white; /* fill for the icon */
 }
 
 .logout-button {
