@@ -1,3 +1,4 @@
+USE FilmCatalog;
 -- Populate the movies info table:
 LOAD DATA LOCAL INFILE 'Data/CleanData/movies_data.csv'
 IGNORE
@@ -27,46 +28,30 @@ SET
 
 -- Populate Keywords table
 LOAD DATA LOCAL INFILE 'Data/CleanData/keywords/keywords.csv'
-	INTO TABLE Keywords 
-	FIELDS TERMINATED BY ',' 
-	ENCLOSED BY '"' 
-	LINES TERMINATED BY '\n' 
-	IGNORE 1 ROWS (keywordId, name);
+    INTO TABLE Keywords 
+    FIELDS TERMINATED BY ',' 
+    ENCLOSED BY '"' 
+    LINES TERMINATED BY '\n' 
+    IGNORE 1 ROWS (keywordId, name);
 
 -- Populate MovieKeyword table (BRIDGE)
 LOAD DATA LOCAL INFILE 'Data/CleanData/keywords/movie_keywords.csv' 
-	INTO TABLE MovieKeywords 
-	FIELDS TERMINATED BY ',' 
-	ENCLOSED BY '"' 
-	LINES TERMINATED BY '\n' 
-	IGNORE 1 ROWS (movieId, keywordId);
+    INTO TABLE MovieKeywords 
+    FIELDS TERMINATED BY ',' 
+    ENCLOSED BY '"' 
+    LINES TERMINATED BY '\n' 
+    IGNORE 1 ROWS (movieId, keywordId);
 
--- Populate ArtificialUserInformation
-LOAD DATA LOCAL INFILE 'Data/ArtificialUserInformation/Users.csv'
-INTO TABLE Users
-FIELDS TERMINATED BY ','
-ENCLOSED BY '"'
-LINES TERMINATED BY '\n'
-IGNORE 1 ROWS
-(userId, userName, emailAddress, @userRole)
-SET userRole = CASE
-	WHEN @userRole IN ('normal', 'admin') THEN @userRole
-	ELSE 'normal'
-END;
+-- Note: Users and UserPasswords loading has been removed as requested.
 
-LOAD DATA LOCAL INFILE 'Data/ArtificialUserInformation/UserPasswords.csv'
-INTO TABLE UserPasswords
-FIELDS TERMINATED BY ','
-ENCLOSED BY '"'
-LINES TERMINATED BY '\n'
-IGNORE 1 ROWS
-(userId, passwordHash);
-
-
+-- Populate Ratings
+-- NOTE: Since the Users table is not being populated, this section will 
+-- likely result in 0 insertions because of the foreign key check 
+-- (userId IN (SELECT userId FROM Users)).
 CREATE TEMPORARY TABLE TempRatings (
-userId INT,
-movieId INT,
-rating DECIMAL(3, 2)
+    userId INT,
+    movieId INT,
+    rating DECIMAL(3, 2)
 );
 
 LOAD DATA LOCAL INFILE 'Data/CleanData/ratings/ratings.csv'
@@ -78,14 +63,14 @@ IGNORE 1 ROWS
 (userId, movieId, rating);
 
 INSERT INTO Ratings (movieId, userId, rating)
-	SELECT movieId, userId, rating
-	FROM TempRatings
-	WHERE movieId IN (SELECT movieId FROM Movies)
-	AND userId IN (SELECT userId FROM Users);
+    SELECT movieId, userId, rating
+    FROM TempRatings
+    WHERE movieId IN (SELECT movieId FROM Movies)
+    AND userId IN (SELECT userId FROM Users);
 
 DROP TEMPORARY TABLE TempRatings;
 
--- Populate Movie Covers
+-- Populate Movie Covers (URLs)
 CREATE TEMPORARY TABLE TempCovers (
     movieId INTEGER,
     coverUrl TEXT
@@ -98,9 +83,9 @@ OPTIONALLY ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 (movieId, coverUrl);
 
+-- Update the main Movies table with the URLs from the temp table
 UPDATE Movies m
 JOIN TempCovers t ON m.movieId = t.movieId
 SET m.coverUrl = t.coverUrl;
 
 DROP TEMPORARY TABLE TempCovers;
-
