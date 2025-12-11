@@ -38,7 +38,23 @@ FLUSH PRIVILEGES;
 ```
 python3 main.py
 ```
-5. Go to the link provided in the console
+5. Go to the link provided in the console (Backend API runs on http://localhost:5000)
+
+6. Set up the Frontend (React + Vite)
+Open a new terminal window and navigate to the frontend folder:
+```
+cd frontend
+```
+Install dependencies:
+```
+npm install
+```
+Start the development server:
+```
+npm run dev
+```
+The application will be available at http://localhost:5173. Ensure the backend is running for API requests to work.
+
 ### main.py
 The primary backend script for the application, built using Flask. It manages routes, user authentication, movie data retrieval, and CRUD operations. Also handles database connections using MySQL.
 - Key Features:
@@ -52,6 +68,9 @@ SQL script to create the database schema for the Film Cataloging System. Defines
 
 -  DBpopulation.sql
  SQL script to populate the database with initial data for testing and development. Includes sample movies, users, and other necessary records.
+
+### Frontend Folder
+Contains the React application source code, including components, pages, and API integration logic.
 
 ### Static Folder
 Folder which contains images to display in the design of the page
