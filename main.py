@@ -72,7 +72,7 @@ def main_page():
     cursor.execute("""
         SELECT movieId, title, overview 
         FROM Movies 
-        ORDER BY RAND() 
+        ORDER BY RAND(UNIX_TIMESTAMP()) 
         LIMIT 30;
     """)
     random_table = cursor.fetchall()
