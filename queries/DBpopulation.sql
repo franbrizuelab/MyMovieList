@@ -1,5 +1,5 @@
 -- Populate the movies info table:
-LOAD DATA INFILE 'Data/CleanData/movies_data.csv'
+LOAD DATA LOCAL INFILE 'Data/CleanData/movies_data.csv'
 IGNORE
 INTO TABLE Movies
 FIELDS TERMINATED BY ','
