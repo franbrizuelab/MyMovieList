@@ -1,0 +1,192 @@
+:root {
+    --header-color: #00298f;       /* Primary header and tab color */
+    --header-hover-color: #1c44a3; /* Hover color for tabs */
+    --active-tab-color: #5774b6;   /* Active tab color */
+    --table-border-color: #ddd; /* Table border color */
+    --button-main-color: #030638;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+/* Header Section */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--header-color);
+    color: white;
+    padding: 10px 20px;
+}
+
+.logo a {
+    text-decoration: none;
+    color: inherit;
+    display: inline-block;
+    background: none !important;
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+.logo img {
+    display: block; 
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0; 
+    height: 50px; 
+    width: auto; 
+}
+
+.logo a:focus, 
+.logo a:hover {
+    outline: none;
+}
+
+.header a {
+    color: white;
+    text-decoration: none;
+    padding: 8px 16px;
+    background-color: #333;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.header a:hover {
+    background-color: #555;
+}
+
+/* Search Container */
+.search-container {
+    max-width: 600px;
+    margin: 20px auto;
+    text-align: center;
+}
+
+.search-container form {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.search-container input[type="text"] {
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 200px;
+}
+
+/* Flash Messages */
+.flash-messages {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #f5c6cb; /* default for danger/warning */
+    background-color: #f8d7da;  /* default for danger/warning */
+    color: #721c24;
+}
+
+.flash-messages ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/* Variants for success, warning, etc. */
+.flash-messages .success {
+    background-color: #155724;
+    color: #f4f4f9;
+    border: 1px solid #155724;
+}
+
+.flash-messages .warning {
+    background-color: #856404;
+    color: #fff3cd;
+    border: 1px solid #856404;
+}
+
+.flash-messages .danger {
+    background-color: #721c24;
+    color: #f4f4f9;
+}
+
+.icon-btn {
+    background-color: var(--header-color);
+    border: none;
+    border-radius: 8px;
+    padding: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+}
+
+.icon-btn:hover {
+    background-color: var(--header-hover-color);
+}
+
+.icon-btn svg {
+    width: 24px;
+    height: 24px;
+}
+
+.icon-btn .search-icon {
+    stroke: white;
+    fill: none;
+}
+
+.icon-btn .person-icon {
+    fill: white;
+    stroke: none;
+}
+
+.icon-btn .logout-icon {
+    stroke: white;
+    fill: none;
+}
+
+h1, h2, h3 {
+    text-align: center;
+    color: var(--header-color);
+}
+
+/* Search Container button styles */
+.search-container button {
+    padding: 8px 16px;
+    font-size: 14px;
+    background-color: white;
+    color: var(--header-color);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.search-container button:hover {
+    background-color: #f1f1f1;
+}
+
+/* Login Button styles */
+.login-btn {
+    background-color: var(--header-color);
+    color: white;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.login-btn:hover {
+    background-color: var(--header-hover-color);
+}

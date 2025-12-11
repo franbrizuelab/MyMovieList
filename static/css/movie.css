@@ -48,34 +48,7 @@ body {
     background-color: #555;
 }
 
-.search-container form {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
 
-.search-container input[type="text"] {
-    padding: 8px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    width: 200px;
-}
-
-.search-container button {
-    padding: 8px 16px;
-    font-size: 14px;
-    background-color: white;
-    color: #00298f;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.search-container button:hover {
-    background-color: #f1f1f1;
-}
 
 .content {
     max-width: 800px;
