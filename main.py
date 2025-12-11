@@ -63,6 +63,7 @@ def main_page():
             (voteAverage * voteCount) / (voteCount + 1) AS weighted_score
         FROM Movies
         WHERE voteAverage IS NOT NULL AND voteCount IS NOT NULL
+        ORDER BY weighted_score DESC
     LIMIT 30;
     """)
     rating_table = cursor.fetchall()
