@@ -200,3 +200,25 @@ h1, h2, h3 {
 .login-btn:hover {
     background-color: var(--header-hover-color);
 }
+
+.logout-button {
+    background-color: var(--button-main-color);
+    border: none;
+    border-radius: 20px; /* round corners */
+    padding: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+}
+
+.logout-button:hover {
+    background-color: var(--header-hover-color);
+}
+
+.logout-button svg {
+    width: 24px;
+    height: 24px;
+    stroke: white; /* fill for the icon */
+}
