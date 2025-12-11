@@ -37,4 +37,22 @@ function showTab(tabIndex) {
 
 document.addEventListener('DOMContentLoaded', () => {
     showTab(0); // Show the first tab by default
+
+    // FEATURE: Cascade scrolling for movie items
+    const movieItems = document.querySelectorAll('.movie-item.hidden');
+    if (movieItems.length > 0 && 'IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    entry.target.classList.remove('hidden'); // Remove hidden class once visible
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1 // Trigger when 10% of the item is visible
+        });
+
+        movieItems.forEach((item) => observer.observe(item));
+    }
 });

@@ -251,3 +251,15 @@ table a:visited {
 table a:hover {
     font-weight: 700; /* Bold on hover (Montserrat:wght@700 is available) */
 }
+
+/* Cascade Scrolling Styles */
+.movie-item {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.movie-item.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
