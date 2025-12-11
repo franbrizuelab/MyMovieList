@@ -189,7 +189,7 @@ h1, h2, h3 {
 .login-btn {
     background-color: var(--header-color);
     border: none;
-    border-radius: 20px; /* round corners */
+    border-radius: 50%; /* circle shape */
     padding: 8px; /* Adjusted padding for icon */
     cursor: pointer;
     display: flex; /* To center the SVG */
