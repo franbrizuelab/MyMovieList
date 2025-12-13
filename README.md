@@ -18,21 +18,9 @@ python3 -m pip install flask mysql-connector-python
 3. Set up the database
 open MySQL:
 ```
-sudo mysql -u root -p
+pyton3 setup_db.py
 ```
-Create and populate the database
-```
-sql> SOURCE /path_to_folder/Film-Cataloging-System-DWP-/queries/DBcreation.sql
-sql> SOURCE /path_to_folder/Film-Cataloging-System-DWP-/queries/DBpopulation.sql;
-```
-(((DELETE OR CHANGE LATER)))
-Note: The [csv files](https://drive.google.com/file/d/1W8I489hHKuglK2GIN0c0EeAG07wuuMAh/view?usp=drive_link) must be in the specified path for mySQL to be able to load it 
 
-Create and grant privileges to the user whose credentials are used for the database connection:
-```
-CREATE USER 'CVML'@'localhost' IDENTIFIED BY '114DWP2025';
-GRANT ALL PRIVILEGES ON FilmCatalog.* TO 'CVML'@'localhost';
-FLUSH PRIVILEGES;
 ```
 4. Run the python script
 ```
@@ -83,4 +71,26 @@ Folder which contains images to display in the design of the page
 - movie.html
 
 ### myenv folder
-Environment folder containing dependencies and configurations for running the Flask app. 
+Environment folder containing dependencies and configurations for running the Flask app.
+
+## Observation:
+In case of errors due to not allowing the script to run from local files, proceed with the following steps for troubleshooting.
+You need root access to modify the MySQL configuration file, which is typically one of these locations on Debian/Ubuntu systems: '/etc/mysql/my.cnf or a file within /etc/mysql/conf.d/'.
+````
+sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf  # (Debian/Ubuntu)
+```
+
+Locate the [mysqld] section.
+Add or modify the local-infile variable to enable it:
+```
+[mysqld]
+# ... other settings ...
+local-infile  =  1
+```
+
+You must restart the MySQL service for the configuration change to take effect:
+```
+sudo systemctl restart mysql
+sudo mysql --local-infile=1 -u root -p FilmCatalog
+````
+
