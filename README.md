@@ -18,7 +18,7 @@ python3 -m pip install flask mysql-connector-python
 3. Set up the database
 open MySQL:
 ```
-pyton3 setup_db.py
+python3 setup_db.py
 ```
 
 ```
@@ -93,4 +93,5 @@ You must restart the MySQL service for the configuration change to take effect:
 sudo systemctl restart mysql
 sudo mysql --local-infile=1 -u root -p FilmCatalog
 ````
+
 
