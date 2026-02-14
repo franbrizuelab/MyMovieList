@@ -21,7 +21,6 @@ open MySQL:
 python3 setup_db.py
 ```
 
-```
 4. Run the python script
 ```
 python3 main.py
@@ -76,7 +75,7 @@ Environment folder containing dependencies and configurations for running the Fl
 ## Observation:
 In case of errors due to not allowing the script to run from local files, proceed with the following steps for troubleshooting.
 You need root access to modify the MySQL configuration file, which is typically one of these locations on Debian/Ubuntu systems: '/etc/mysql/my.cnf or a file within /etc/mysql/conf.d/'.
-````
+```
 sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf  # (Debian/Ubuntu)
 ```
 
@@ -93,5 +92,6 @@ You must restart the MySQL service for the configuration change to take effect:
 sudo systemctl restart mysql
 sudo mysql --local-infile=1 -u root -p FilmCatalog
 ````
+
 
 
