@@ -3,6 +3,8 @@ Dynamic web Programming Final Project
 
 ![Alt Text](frontend/public/nycuflix.png)
 
+![Alt Text](frontend/public/demo.gif)
+
 ## How to run the Application
 
 
@@ -92,6 +94,7 @@ You must restart the MySQL service for the configuration change to take effect:
 sudo systemctl restart mysql
 sudo mysql --local-infile=1 -u root -p FilmCatalog
 ````
+
 
 
 
