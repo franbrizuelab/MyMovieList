@@ -1,7 +1,7 @@
 ﻿# Film-Cataloging-System-DWP
 Dynamic web Programming Final Project
 
-![Alt Text](static/nycuflix.png)
+![Alt Text](frontend/public/nycuflix.png)
 
 ## How to run the Application
 
@@ -92,6 +92,7 @@ You must restart the MySQL service for the configuration change to take effect:
 sudo systemctl restart mysql
 sudo mysql --local-infile=1 -u root -p FilmCatalog
 ````
+
 
 
 
